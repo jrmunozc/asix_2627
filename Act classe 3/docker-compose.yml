@@ -1,0 +1,30 @@
+services:
+  app1:
+    image: containous/whoami
+    container_name: app1
+    networks:
+      - xarxa_web
+
+  app2:
+    image: containous/whoami
+    container_name: app2
+    networks:
+      - xarxa_web
+
+  balancejador:
+    image: haproxy:2.8
+    container_name: haproxy_lb
+    ports:
+      - "80:80"
+      - "8404:8404"
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - xarxa_web
+
+networks:
+  xarxa_web:
+    driver: bridge
