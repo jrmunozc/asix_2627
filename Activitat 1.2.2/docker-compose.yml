@@ -1,0 +1,38 @@
+services:
+  app1:
+    build: ./app
+    container_name: app1
+    hostname: app1
+    environment:
+      - NODE_NAME=APP_1
+      - NGINX_ENVSUBST_OUTPUT_DIR=/usr/share/nginx/html
+    networks:
+      - cluster_net
+
+  app2:
+    build: ./app
+    container_name: app2
+    hostname: app2
+    environment:
+      - NODE_NAME=APP_2
+      - NGINX_ENVSUBST_OUTPUT_DIR=/usr/share/nginx/html
+    networks:
+      - cluster_net
+
+  haproxy:
+    image: haproxy:alpine
+    container_name: haproxy
+    ports:
+      - "8080:8080"
+      - "8404:8404"
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - cluster_net
+
+networks:
+  cluster_net:
+    driver: bridge

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Servidor Web ASIX</title>
+</head>
+<body>
+    <h1>¡Hola! Resposta servida des del node web</h1>
+    <h2>Servidor actiu: <span>${NODE_NAME}</span></h2>
+</body>
+</html>
