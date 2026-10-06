@@ -16,7 +16,7 @@ services:
     image: phpmyadmin:latest
     container_name: entorn_phpmyadmin
     ports:
-      - "8080:80"
+      - "8084:84"
     environment:
       PMA_HOST: servidor_db
     depends_on:

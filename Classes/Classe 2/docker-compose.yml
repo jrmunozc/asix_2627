@@ -1,0 +1,6 @@
+services:
+  web_principal:
+    image: nginx:alpine
+    container_name: primer_server
+    ports:
+      - "8080:80"
